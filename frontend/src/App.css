@@ -3,33 +3,28 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #e9ebee;
+  background-color: #f4f4f9;
   font-family: 'Arial', sans-serif;
 }
 
-.chat-box {
-  width: 400px;
-  height: 600px;
-  background-color: rgb(255, 236, 255);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-.messages {
-  flex-grow: 1;
-  overflow-y: auto;
+.chat-container {
+  width: 80%;
+  max-width: 600px;
+  height: 80vh;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  overflow: hidden;
 }
 
 .message {
-  padding: 10px;
-  border-radius: 18px;
-  max-width: 80%;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 5px;
+  max-width: 70%;
   word-wrap: break-word;
 }
 
@@ -38,31 +33,39 @@
   background-color: #dcf8c6;
 }
 
-.message.system {
+.message.agent {
   align-self: flex-start;
   background-color: #f0f0f0;
 }
 
-.message-form {
+.file-upload-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
   padding: 10px;
-  gap: 10px;
-  border-top: 1px solid #ccc;
 }
 
-input[type="file"] {
+.file-input {
   flex-grow: 1;
+  border: 2px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  margin-right: 10px;
 }
 
-button {
-  background-color: #5c67f2;
+.upload-button {
+  padding: 10px 15px;
+  background-color: #4CAF50;
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 18px;
+  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
+  margin-right: 20px;  
 }
 
-button:hover {
-  background-color: #4a54e1;
+.upload-button:hover {
+  background-color: #45a049;
 }

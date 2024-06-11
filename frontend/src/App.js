@@ -5,20 +5,24 @@ function App() {
   const [file, setFile] = useState(null);
   const [messages, setMessages] = useState([]);
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-    setMessages([...messages, { text: `Selected file - ${event.target.files[0].name}`, sender: 'user' }]);
+  const handleFileSelect = (event) => {
+    const selectedFile = event.target.files[0];
+    if (!selectedFile) {
+      return;
+    }
+    setFile(selectedFile);
+    setMessages(prev => [...prev, { text: `Selected file: ${selectedFile.name}`, sender: 'user' }]);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleUpload = async () => {
     if (!file) {
       alert('Please select a file first.');
       return;
     }
+    setMessages(prev => [...prev, { text: 'Uploading file...', sender: 'user' }]);
+
     const formData = new FormData();
     formData.append('file', file);
-    setMessages([...messages, { text: 'Uploading...', sender: 'system' }]);
 
     // Send the file to the backend
     const response = await fetch('/upload', {
@@ -26,23 +30,21 @@ function App() {
       body: formData,
     });
     const result = await response.json();
-    setMessages([...messages, { text: `File uploaded! Detected: ${result.description}`, sender: 'system' }]);
+    setMessages(prev => [...prev, { text: `File uploaded! Detected: ${result.description}`, sender: 'agent' }]);
   };
 
   return (
     <div className="App">
-      <div className="chat-box">
-        <div className="messages">
-          {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.sender}`}>
-              {msg.text}
-            </div>
-          ))}
+      <div className="chat-container">
+        {messages.map((msg, index) => (
+          <div key={index} className={`message ${msg.sender}`}>
+            {msg.text}
+          </div>
+        ))}
+        <div className="file-upload-container">
+          <input type="file" onChange={handleFileSelect} className="file-input" />
+          <button onClick={handleUpload} className="upload-button">Upload</button>
         </div>
-        <form onSubmit={handleSubmit} className="message-form">
-          <input type="file" onChange={handleFileChange} />
-          <button type="submit">Detect</button>
-        </form>
       </div>
     </div>
   );
