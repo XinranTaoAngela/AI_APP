@@ -41,7 +41,7 @@ function App() {
         </div>
         <form onSubmit={handleSubmit} className="message-form">
           <input type="file" onChange={handleFileChange} />
-          <button type="submit">Send</button>
+          <button type="submit">Detect</button>
         </form>
       </div>
     </div>
