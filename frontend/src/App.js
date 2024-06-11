@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import './App.css';
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <div className="chat-container">
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
@@ -46,6 +49,7 @@ function App() {
           <button onClick={handleUpload} className="upload-button">Upload</button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
